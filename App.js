@@ -1,14 +1,58 @@
 import { useEffect, useState } from "react";
 import { TouchableHighlight, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
-import { Text, View, StyleSheet, Image } from 'react-native'
+import { Text, View, StyleSheet, Image,SafeAreaView } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+
+// import { StatusBar } from "expo-status-bar";
+// import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+
+
 
 
 
 export default App = () => {
-  let stack = createNativeStackNavigator();
+  let Tab = createMaterialTopTabNavigator();
+//  const insets = useSafeAreaInsets();
 
+  return (
+    
+    <NavigationContainer >
+       
+      <Tab.Navigator initialRouteName="Home" screenOptions={{
+        tabBarActiveTintColor: '#e91e63',
+        tabBarPressColor:'blue',
+        tabBarInactiveTintColor:'green',
+        tabBarGap:10,
+        tabBarShowLabel:false,
+      
+        
+        tabBarStyle:{paddingTop:35}
+      }}>
+        <Tab.Screen name='Mor' component={More} options={{
+          headerShown: false,
+          tabBarIcon: ({focused})=>(<Image source={require('./assets/exchange.png')} style={styles.img} />)
+        }}/>
+        <Tab.Screen  name='Home' component={Home} options={{
+          
+          headerShown: false,
+          tabBarIcon: ({focused})=>(<Image source={require('./assets/favicon.png')} style={styles.img} />)
+        }} />
+        <Tab.Screen name='apps' component={More}  options={{
+          tabBarLabel: '',
+          tabBarIcon: ({focused})=>(<Image source={require('./assets/apps.png')} style={styles.img} />)}}/>
+        <Tab.Screen name='Menu' component={More}  options={{
+          tabBarLabel:'',
+          tabBarIcon: ({focused})=>(<Image source={require('./assets/menu.png')} style={styles.img} />)}}/>
+       
+      </Tab.Navigator>
+    </NavigationContainer>
+    
+
+  );
+}
+let Home = () => {
   let [value, setValue] = useState('0')
   let [x, setData1] = useState(0)
   let [y, setData2] = useState(0)
@@ -80,33 +124,6 @@ export default App = () => {
   }
   return (
     <View style={{ flex: 1, flexDirection: 'column' }} >
-      <View style={{ flexDirection: 'row', margin: 30, justifyContent: 'space-between', marginTop: 50 }}>
-        {/* <NavigationContainer>
-          <stack.Navigator>
-            <stack.Screen name='Home' component={Home} />
-          </stack.Navigator>
-        </NavigationContainer>
-        <NavigationContainer>
-          <stack.Navigator>
-            <stack.Screen name='Home' component={Home} />
-          </stack.Navigator>
-        </NavigationContainer> */}
-        <TouchableHighlight>
-          <Image source={require('./assets/exchange.png')} style={styles.img}></Image>
-
-        </TouchableHighlight>
-        <TouchableHighlight>
-          <Image source={require('./assets/favicon.png')} style={styles.img}></Image>
-        </TouchableHighlight>
-        <TouchableHighlight>
-          <Image source={require('./assets/apps.png')} style={styles.img}></Image>
-        </TouchableHighlight>
-        <TouchableHighlight>
-          <Image source={require('./assets/menu.png')} style={styles.img}></Image>
-        </TouchableHighlight>
-      </View>
-
-
       <View style={styles.display}>
         <Text style={styles.displayText}>{value}</Text>
       </View>
@@ -186,21 +203,40 @@ export default App = () => {
           <Text style={styles.text}>=</Text>
         </TouchableOpacity>
       </View>
-
-    </View >
-  );
-}
-let Home = () => {
-  return (
-    <TouchableHighlight>
-      <Image source={require('./assets/exchange.png')} style={styles.img}></Image>
-
-    </TouchableHighlight>
+    </View>
   )
 }
-let About = () => {
+let More = () => {
   return (
-    <Text>abot</Text>
+    <View style={{ flexDirection: 'row', margin: 40,justifyContent:'space-between' }}>
+      <TouchableHighlight >
+        <Image source={require('./assets/exchange.png')} style={styles.img}></Image>
+
+      </TouchableHighlight>
+      <TouchableHighlight>
+        <Image source={require('./assets/apps.png')} style={styles.img}></Image>
+      </TouchableHighlight>
+      <TouchableHighlight>
+        <Image source={require('./assets/apps.png')} style={styles.img}></Image>
+      </TouchableHighlight>
+      <TouchableHighlight>
+        <Image source={require('./assets/menu.png')} style={styles.img}></Image>
+      </TouchableHighlight>
+      <TouchableHighlight >
+        <Image source={require('./assets/exchange.png')} style={styles.img}></Image>
+
+      </TouchableHighlight>
+      <TouchableHighlight>
+        <Image source={require('./assets/favicon.png')} style={styles.img}></Image>
+      </TouchableHighlight>
+      <TouchableHighlight>
+        <Image source={require('./assets/apps.png')} style={styles.img}></Image>
+      </TouchableHighlight>
+      <TouchableHighlight>
+        <Image source={require('./assets/menu.png')} style={styles.img}></Image>
+      </TouchableHighlight>
+      
+    </View>
   )
 }
 let styles = StyleSheet.create({
@@ -210,9 +246,6 @@ let styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     alignContent: 'flex-end',
-
-
-
   },
   text: {
     fontSize: 27
@@ -222,22 +255,14 @@ let styles = StyleSheet.create({
     width: 70,
     justifyContent: 'center',
     alignItems: 'center',
-
-
   },
   display: {
-
-
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
-
     height: '40%',
-
-
   },
   displayText: {
     fontSize: 45
-
   },
   textEle: {
     color: 'orange'
@@ -245,5 +270,4 @@ let styles = StyleSheet.create({
     height: 20,
     width: 20
   }
-
 })
