@@ -22,29 +22,29 @@ export default App = () => {
        
       <Tab.Navigator initialRouteName="Home" screenOptions={{
         tabBarActiveTintColor: '#e91e63',
-        tabBarPressColor:'blue',
-        tabBarInactiveTintColor:'green',
+        tabBarPressColor:'orange',
+        
         tabBarGap:10,
         tabBarShowLabel:false,
-      
         
-        tabBarStyle:{paddingTop:35}
+        
+        tabBarStyle:{paddingTop:35,backgroundColor:'white',shadowColor:'white'}
       }}>
         <Tab.Screen name='Mor' component={More} options={{
           headerShown: false,
-          tabBarIcon: ({focused})=>(<Image source={require('./assets/exchange.png')} style={styles.img} />)
+          tabBarIcon: ({focused})=>(<Image source={require('./assets/exchange.png')} style={[styles.img ,{tintColor: focused ? 'orange': 'black'}] }  />)
         }}/>
         <Tab.Screen  name='Home' component={Home} options={{
           
           headerShown: false,
-          tabBarIcon: ({focused})=>(<Image source={require('./assets/favicon.png')} style={styles.img} />)
+          tabBarIcon: ({focused})=>(<Image source={require('./assets/favicon.png')} style={[styles.img ,{tintColor: focused ? 'orange': 'black'}] }  />)
         }} />
         <Tab.Screen name='apps' component={More}  options={{
           tabBarLabel: '',
-          tabBarIcon: ({focused})=>(<Image source={require('./assets/apps.png')} style={styles.img} />)}}/>
+          tabBarIcon: ({focused})=>(<Image source={require('./assets/apps.png')} style={[styles.img ,{tintColor: focused ? 'orange': 'black'}] } />)}}/>
         <Tab.Screen name='Menu' component={More}  options={{
           tabBarLabel:'',
-          tabBarIcon: ({focused})=>(<Image source={require('./assets/menu.png')} style={styles.img} />)}}/>
+          tabBarIcon: ({focused})=>(<Image source={require('./assets/menu.png')} style={[styles.img ,{tintColor: focused ? 'orange': 'black'}] }  />)}}/>
        
       </Tab.Navigator>
     </NavigationContainer>
@@ -123,7 +123,7 @@ let Home = () => {
     }
   }
   return (
-    <View style={{ flex: 1, flexDirection: 'column' }} >
+    <View style={{ flex: 1, flexDirection: 'column',backgroundColor:'white' }} >
       <View style={styles.display}>
         <Text style={styles.displayText}>{value}</Text>
       </View>
@@ -199,7 +199,7 @@ let Home = () => {
         <TouchableOpacity style={styles.ele} onPress={() => pressed('.')}>
           <Text style={styles.text}>.</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.ele, { height: 70, width: 70, borderRadius: 20, backgroundColor: 'orange' }]} onPress={() => pressed('=')}>
+        <TouchableOpacity style={[styles.ele, { height: 70, width: 70, borderRadius: 30, backgroundColor: 'orange' }]} onPress={() => pressed('=')}>
           <Text style={styles.text}>=</Text>
         </TouchableOpacity>
       </View>
@@ -208,7 +208,8 @@ let Home = () => {
 }
 let More = () => {
   return (
-    <View style={{ flexDirection: 'row', margin: 40,justifyContent:'space-between' }}>
+    <View style={{flex:1,backgroundColor:'white'}}>
+      <View style={{margin:40, flexDirection: 'row',justifyContent:'space-between' ,}}>
       <TouchableHighlight >
         <Image source={require('./assets/exchange.png')} style={styles.img}></Image>
 
@@ -235,6 +236,7 @@ let More = () => {
       <TouchableHighlight>
         <Image source={require('./assets/menu.png')} style={styles.img}></Image>
       </TouchableHighlight>
+      </View>
       
     </View>
   )
@@ -265,7 +267,7 @@ let styles = StyleSheet.create({
     fontSize: 45
   },
   textEle: {
-    color: 'orange'
+    color: 'orange',
   }, img: {
     height: 20,
     width: 20
